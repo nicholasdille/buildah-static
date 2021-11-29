@@ -1,0 +1,58 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    "docker:enableMajor",
+    "docker:pinDigests",
+    ":disableRateLimiting",
+    ":automergePr",
+    ":automergeRequireAllStatusChecks",
+    ":automergePatch",
+    ":semanticCommits"
+  ],
+
+  "enabledManagers": [
+    "regex"
+  ],
+
+  "major": {
+    "labels": ["type/renovate", "bump/major"]
+  },
+  "minor": {
+    "labels": ["type/renovate", "bump/minor"]
+  },
+  "patch": {
+    "labels": ["type/renovate", "bump/patch"]
+  },
+  "pin": {
+    "labels": ["type/renovate", "bump/pin"]
+  },
+  "digest": {
+    "labels": ["type/renovate", "bump/digest"]
+  },
+
+  "regexManagers": [
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n(ENV|ARG) .*?_VERSION=(?<currentValue>.*)\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ],
+
+  "packageRules": [
+    {
+      "updateTypes": ["pin", "digest", "patch"],
+      "automerge": true
+    },
+    {
+      "packageNames": [
+        "containers/buildah"
+      ],
+      "extractVersion": "^v(?<version>.+)$",
+      "updateTypes": ["pin", "digest", "patch", "minor", "major"],
+      "automerge": true
+    }
+  ]
+}

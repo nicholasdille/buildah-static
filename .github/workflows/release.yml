@@ -1,0 +1,44 @@
+name: build-static
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-static:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          docker build . \
+              --target local \
+              --output type=local,dest=.
+
+      - name: Get version
+        id: get_version
+        if: github.event_name != 'pull_request'
+        run: |
+          echo "::set-output name=version::$(./buildah --version | cut -d' ' -f3)"
+
+      - name: Create release
+        id: create_release
+        if: github.event_name != 'pull_request'
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.BOT_GITHUB_TOKEN }}
+          allowUpdates: true
+          name: "buildah ${{ steps.get_version.outputs.version }}"
+          tag: v${{ steps.get_version.outputs.version }}
+          draft: false
+          omitBody: true
+          prerelease: false
+          replacesArtifacts: true
+          artifacts: "buildah"

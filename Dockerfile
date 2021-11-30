@@ -16,5 +16,5 @@ RUN mkdir -p /usr/local/share/man/man1 \
  && mv docs/*.1 /usr/local/share/man/man1
 
 FROM scratch AS local
-COPY --from=podman /usr/local/bin/podman ./bin/
-COPY --from=podman /usr/local/share/man ./share/man/
+COPY --from=buildah /usr/local/bin/buildah ./bin/
+COPY --from=buildah /usr/local/share/man ./share/man/

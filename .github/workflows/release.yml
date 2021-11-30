@@ -14,19 +14,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Build nix
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          docker build --tag nix github.com/NixOS/docker
+
       - name: Build
         env:
           DOCKER_BUILDKIT: 1
         run: |
           docker build . \
               --target local \
-              --output type=local,dest=.
+              --output type=local,dest=.; \
+          tar -czf buildah.tar.gz bin share
 
       - name: Get version
         id: get_version
         if: github.event_name != 'pull_request'
         run: |
-          echo "::set-output name=version::$(./buildah --version | cut -d' ' -f3)"
+          echo "::set-output name=version::$(./bin/buildah --version | cut -d' ' -f3)"
 
       - name: Create release
         id: create_release
@@ -41,4 +48,4 @@ jobs:
           omitBody: true
           prerelease: false
           replacesArtifacts: true
-          artifacts: "buildah"
+          artifacts: "buildah.tar.gz"

@@ -43,16 +43,14 @@
 
   "packageRules": [
     {
-      "updateTypes": ["pin", "digest", "patch"],
+      "updateTypes": ["pin", "digest", "patch", "minor", "major"],
       "automerge": true
     },
     {
       "packageNames": [
         "containers/buildah"
       ],
-      "extractVersion": "^v(?<version>.+)$",
-      "updateTypes": ["pin", "digest", "patch", "minor", "major"],
-      "automerge": true
+      "extractVersion": "^v(?<version>.+)$"
     }
   ]
 }

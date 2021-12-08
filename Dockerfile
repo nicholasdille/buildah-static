@@ -13,7 +13,7 @@ RUN mkdir -p /usr/local/share/man/man1 \
  && nix build -f nix \
  && make -C docs GOMD2MAN=go-md2man \
  && cp -rfp ./result/bin/buildah /usr/local/bin/ \
- && mv docs/*.1 /usr/local/share/man/man1
+ && cp docs/*.1 /usr/local/share/man/man1
 
 FROM scratch AS local
 COPY --from=buildah /usr/local/bin/buildah ./bin/

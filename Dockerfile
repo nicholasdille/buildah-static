@@ -3,7 +3,7 @@ RUN apk add --update-cache --no-cache \
         make \
         go-md2man
 # renovate: datasource=github-releases depName=containers/buildah
-ARG BUILDAH_VERSION=1.23.1
+ARG BUILDAH_VERSION=1.23.2
 ARG BUILDAH_BUILDTAGS='seccomp apparmor exclude_graphdriver_devicemapper'
 WORKDIR $GOPATH/src/github.com/containers/buildah
 RUN test -n "${BUILDAH_VERSION}" \

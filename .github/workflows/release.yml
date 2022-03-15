@@ -43,7 +43,7 @@ jobs:
           path: buildah-${{ matrix.arch }}.tar.gz
 
   release:
-    if: github.event_name != 'pull_request'
+    if: always() && github.event_name != 'pull_request'
     needs:
     - build
     runs-on: ubuntu-latest

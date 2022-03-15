@@ -1,4 +1,4 @@
-FROM nix AS buildah
+FROM nixos/nix:2.7.0 AS buildah
 RUN apk add --update-cache --no-cache \
         make \
         go-md2man

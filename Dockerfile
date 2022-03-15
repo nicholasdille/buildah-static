@@ -2,7 +2,7 @@ FROM ubuntu:20.04 AS clone
 # renovate: datasource=github-releases depName=containers/buildah
 ARG BUILDAH_VERSION=1.24.2
 RUN apt-get update \
- && apt-get -y install --no-install-recommands \
+ && apt-get -y install --no-install-recommends \
         git
 WORKDIR /tmp/buildah
 RUN test -n "${BUILDAH_VERSION}" \

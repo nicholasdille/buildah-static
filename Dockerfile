@@ -13,7 +13,7 @@ RUN test -n "${BUILDAH_VERSION}" \
 FROM nixos/nix:2.7.0 AS binaries
 COPY --from=clone /tmp/buildah /tmp/buildah
 WORKDIR /tmp/buildah
-RUN nix build -f nix \
+RUN nix build -f nix --extra-experimental-features nix-command \
  && cp -rfp ./result/bin/buildah /usr/local/bin/
 
 FROM alpine:3.15 AS manpages

@@ -43,7 +43,7 @@ jobs:
               --platform linux/${{ matrix.arch }} \
               --target local \
               --output type=local,dest=.; \
-          tar -czf buildah.tar.gz bin share
+          tar -czf buildah-${{ matrix.arch }}.tar.gz bin share
 
       - name: Store tarball
         uses: actions/upload-artifact@v3

@@ -3,7 +3,8 @@ FROM ubuntu:20.04 AS clone
 ARG BUILDAH_VERSION=1.24.2
 RUN apt-get update \
  && apt-get -y install --no-install-recommends \
-        git
+        git \
+        ca-certificates
 WORKDIR /tmp/buildah
 RUN test -n "${BUILDAH_VERSION}" \
  && git clone --config advice.detachedHead=false --depth 1 --branch "v${BUILDAH_VERSION}" \

@@ -34,8 +34,8 @@ jobs:
           docker build . \
               --platform linux/${{ matrix.arch }} \
               --target local \
-              --output type=local,dest=.; \
-          tar -czf buildah-${{ matrix.arch }}.tar.gz bin share
+              --output type=tar,dest=buildah-${{ matrix.arch }}.tar.gz; \
+          gzip buildah-${{ matrix.arch }}.tar
 
       - name: Store tarball
         uses: actions/upload-artifact@v3

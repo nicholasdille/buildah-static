@@ -10,7 +10,7 @@ RUN test -n "${BUILDAH_VERSION}" \
  && git clone --config advice.detachedHead=false --depth 1 --branch "v${BUILDAH_VERSION}" \
         https://github.com/containers/buildah .
 
-FROM nixos/nix:2.7.0 AS binaries
+FROM nixos/nix:2.8.0@sha256:cafda2d5f9de275ca0b6cf617d2664200fb96082a23c0ee070c130938f2e9197 AS binaries
 COPY --from=clone /tmp/buildah /tmp/buildah
 WORKDIR /tmp/buildah
 RUN nix build -f nix --extra-experimental-features nix-command \

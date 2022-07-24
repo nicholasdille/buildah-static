@@ -21,6 +21,11 @@
     ":enableVulnerabilityAlerts",
     ":enableVulnerabilityAlertsWithLabel(security)"
   ],
+  
+  "rebaseWhen": "conflicted",
+  "platformAutomerge": true,
+  "rebaseLabel": "renovate/rebase",
+  "stopUpdatingLabel": "renovate/stop-updating",
 
   "major":  { "labels": ["bump/major"] },
   "minor":  { "labels": ["bump/minor"] },

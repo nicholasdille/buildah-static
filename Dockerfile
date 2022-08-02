@@ -1,6 +1,6 @@
 #syntax=docker/dockerfile:1.4.2
 
-FROM ubuntu:22.04@sha256:b6b83d3c331794420340093eb706a6f152d9c1fa51b262d9bf34594887c2c7ac AS clone
+FROM ubuntu:22.04@sha256:34fea4f31bf187bc915536831fd0afc9d214755bf700b5cdb1336c82516d154e AS clone
 # renovate: datasource=github-releases depName=containers/buildah
 ARG BUILDAH_VERSION=1.26.2
 RUN apt-get update \
